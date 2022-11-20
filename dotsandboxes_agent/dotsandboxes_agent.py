@@ -68,15 +68,16 @@ class Agent(pyspiel.Bot):
         :returns: The selected action from the legal actions, or
             `pyspiel.INVALID_ACTION` if there are no legal actions available.
         """
-        pass
+        actions = state.legal_actions()
+        return actions[0]
 
 
 def test_api_calls():
     """This method calls a number of API calls that are required for the
     tournament. It should not trigger any Exceptions.
     """
-    dotsandboxes_game_string = ( # TODO Change default size
-        "dotsandboxes(num_rows=2,num_cols=2)")
+    dotsandboxes_game_string = (
+        "dotsandboxes(num_rows=5,num_cols=5)")
     game = pyspiel.load_game(dotsandboxes_game_string)
     bots = [get_agent_for_tournament(player_id) for player_id in [0,1]]
     returns = evaluate_bots.evaluate_bots(game.new_initial_state(), bots, np.random)

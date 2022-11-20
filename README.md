@@ -27,33 +27,25 @@ Since this virtual environment will be used to run the tournament, you should av
 
 This section describes how get started with using Dots and Boxes in OpenSpiel.
 
-TODO: update instructions for Dots and Boxes
 
-First, install OpenSpiel as [described on the github site](https://openspiel.readthedocs.io/en/latest/install.html#installation-from-source). To guarantee compatibility with the installation on the departmental computers, you should use v1.0.2 of OpenSpiel. You can download this version with:
-
-```
-git clone -b 'v1.0.2' --single-branch --depth 1 https://github.com/deepmind/open_spiel.git
-```
-
-Importantly, you must install from source and prepend a flag that will ensure it compiles the optional dependency on the [ACPC poker engine](http://www.computerpokercompetition.org/).
+First, download [our custom branch of OpenSpiel](https://gitlab.kuleuven.be/dtai/courses/machine-learning-project/open_spiel/-/tree/dots_and_boxes) and install as [described on the github site](https://openspiel.readthedocs.io/en/latest/install.html#installation-from-source). To guarantee compatibility with the installation on the departmental computers, you should use v1.2 of OpenSpiel. You can download this version with:
 
 ```
-cd /path/to/open_spiel
-OPEN_SPIEL_BUILD_WITH_ACPC=ON ./install.sh
-OPEN_SPIEL_BUILD_WITH_ACPC=ON ./open_spiel/scripts/build_and_run_tests.sh
+git clone -b 'v1.2' --single-branch --depth 1 https://gitlab.kuleuven.be/dtai/courses/machine-learning-project/open_spiel.git
+git checkout dots_and_boxes
 ```
 
 Next, update your `PYTHONPATH` as discussed in [OpenSpiel's installation instructions](https://openspiel.readthedocs.io/en/latest/install.html#installation-from-source), reload the shell if necessary, and activate the virtual environment.
 To make sure everything works, you can try to execute the example script:
 
 ```
-python3 python/examples/poker_fcpa_example.py
+python3 python/examples/dotsandboxes_example.py
 ```
 
-This will run two random players in FCPA poker. You can also play fixed policies like always-call and always-fold, in addition to playing against them yourself on the keyboard by passing flags:
+This will run two random players in dots and boxes. You can also play yourself on the keyboard by passing flags:
 
 ```
-python3 python/examples/poker_fcpa_example.py \ 
+python3 python/examples/dotsandboxes_example.py \ 
     --player0=random --player1=human
 ```
 
@@ -62,8 +54,8 @@ python3 python/examples/poker_fcpa_example.py \
 
 The tournament will be played with agents that are available on the departmental computers. This will allow you to try your agent in the identical environment that is used by the tournament script. For this to work, you have to adhere to the following setup:
 
-- Your agent extends the `Agent` class provided in the file `fcpa_agent/fcpa_agent.py`.
-- The tournament code will scrape the directory provided for you on the departmental computers for the `fcpa_agent.py` file and call the `get_agent_for_tournament` method. If multiple matching files are found, a random one will be used.
+- Your agent extends the `Agent` class provided in the file `dotsandboxes_agent/dotsandboxes_agent.py`.
+- The tournament code will scrape the directory provided for you on the departmental computers for the `dotsandboxes_agent.py` file and call the `get_agent_for_tournament` method. If multiple matching files are found, a random one will be used.
 - Your agent should be ready to play in a few seconds, thus use a pre-trained policy. An agent that is not responding after 10 seconds will forfeit the game.
 
 Make sure you **do not use relative paths** in your implementation to load your trained model, as this will fail when running your agent from a different directory. Best practice is to retrieve the absolute path to the module directory:
