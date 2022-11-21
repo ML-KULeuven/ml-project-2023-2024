@@ -119,6 +119,7 @@ class DotsAndBoxesAgent:
     def end_game(self):
         assert self.state.is_terminal()
         self.ended = True
+        logger.info(f"Game ended. Returns = {self.state.returns()}")
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug(f"End state (player {self.state.current_player()}):")
             logger.debug(str(self.state))
@@ -227,11 +228,16 @@ async def handler(websocket, path):
     logger.info("Exit handler")
 
 
-def start_server(port):
-    server = websockets.serve(handler, 'localhost', port)
-    print("Running on ws://127.0.0.1:{}".format(port))
-    asyncio.get_event_loop().run_until_complete(server)
-    asyncio.get_event_loop().run_forever()
+async def start_server(port):
+    async with websockets.serve(handler, "localhost", port):
+        print("Running on ws://127.0.0.1:{}".format(port))
+        await asyncio.Future()  # run forever
+
+    # try:
+    #     asyncio.get_event_loop().run_until_complete(server)
+    #     asyncio.get_event_loop().run_forever()
+    # except KeyboardInterrupt:
+        # pass
 
 
 def main(argv=None):
@@ -249,7 +255,7 @@ def main(argv=None):
 
     agentdir = args.agent1_dir
     agentclass = DotsAndBoxesAgent
-    start_server(args.port)
+    asyncio.run(start_server(args.port))
 
 
 if __name__ == "__main__":
