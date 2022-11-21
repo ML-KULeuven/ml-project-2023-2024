@@ -12,6 +12,7 @@ Copyright (c) 2022 KU Leuven. All rights reserved.
 import sys
 import argparse
 import logging
+import random
 import numpy as np
 import pyspiel
 from open_spiel.python.algorithms import evaluate_bots
@@ -68,8 +69,11 @@ class Agent(pyspiel.Bot):
         :returns: The selected action from the legal actions, or
             `pyspiel.INVALID_ACTION` if there are no legal actions available.
         """
-        actions = state.legal_actions()
-        return actions[0]
+        # Plays random action, change with your best strategy
+        legal_actions = state.legal_actions()
+        rand_idx = random.randint(0, len(legal_actions) - 1)
+        action = legal_actions[rand_idx]
+        return action
 
 
 def test_api_calls():
