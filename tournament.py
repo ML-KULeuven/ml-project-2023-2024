@@ -27,7 +27,7 @@ logger = logging.getLogger('be.kuleuven.cs.dtai.dotsandboxes.tournament')
 
 
 def load_agent(path, player_id):
-    """Inintialize an agent from a 'dotsandboxes_agent.py' file.
+    """Initialize an agent from a 'dotsandboxes_agent.py' file.
     """
     module_dir = os.path.dirname(os.path.abspath(path))
     sys.path.insert(1, module_dir)
