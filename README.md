@@ -70,7 +70,7 @@ model_file = os.path.join(package_directory, 'models', 'mymodel.pckl')
 
 If you use Tensorflow you must use the V2 api and cannot use `tf.compat` and `tf.compat.v1` namespaces. Otherwise, this will give problems when playing against other agents in the tournament.
 
-If you prefer to program in C++, you can also use OpenSpiel's C++ API. Although, you will still have to write a Python wrapper to be able to participate in the tournament. To compile C++ code on the departmental computers you can use the g++ compiler.
+If you prefer to program in C++, you can also use OpenSpiel's C++ API (use the `usr/bin/g++-11` compiler on the departmental machines). Although, you will still have to write a Python wrapper to be able to participate in the tournament. To compile C++ code on the departmental computers you can use the g++ compiler.
 
 
 ## Submission using the Departmental Computers
