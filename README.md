@@ -30,8 +30,7 @@ This section describes how get started with using Dots and Boxes in OpenSpiel.
 First, download [our custom branch of OpenSpiel](https://gitlab.kuleuven.be/dtai/courses/machine-learning-project/open_spiel/-/tree/dots_and_boxes).
 
 ```
-git clone https://gitlab.kuleuven.be/dtai/courses/machine-learning-project/open_spiel.git
-git checkout dots_and_boxes
+git clone -b dots_and_boxes https://gitlab.kuleuven.be/dtai/courses/machine-learning-project/open_spiel.git
 ```
 
 Next, install from source as described in [OpenSpiel's documentation](https://openspiel.readthedocs.io/en/latest/install.html#installation-from-source). Don't forget to update your `PYTHONPATH`, reload the shell if necessary, and activate the virtual environment.
