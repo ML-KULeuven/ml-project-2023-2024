@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 # encoding: utf-8
 """
-agent_websocket.py
+websocket_player.py
 
-Run an agent inside a websocket that is compatible with the user interface 
-available on https://github.com/wannesm/dotsandboxes .
+Run an agent in the dotsandboxes_agent directory with websocket communication
+protocol used by the user interface available on 
+https://github.com/wannesm/dotsandboxes .
 
 Instructions:
 - Start agent using `./agent_websocket.py <dir-where-agent-is> 5001`
 - Start local server using `./dotsandboxesserver.py 8080`
 - Go to `127.0.0.1:8080`
-- Enter `ws://127.0.0.1:5001` as one of the agents
+- Enter `ws://127.0.0.1:5001` as one of the agents in the interface
 - Start playing
 
 Created by Wannes Meert
@@ -24,7 +25,6 @@ import asyncio
 import websockets
 import json
 from collections import defaultdict
-import random
 
 import pyspiel
 import open_spiel
@@ -37,11 +37,10 @@ agentclass = None
 agentdir = None
 
 
-class DotsAndBoxesAgent:
+class DotsAndBoxesSocketPlayer:
     """Example Dots and Boxes agent implementation base class.
-    It returns a random next move.
 
-    A DotsAndBoxesAgent object should implement the following methods:
+    A DotsAndBoxesSocketPlayer object should implement the following methods:
     - __init__
     - register_action
     - next_action
@@ -101,9 +100,6 @@ class DotsAndBoxesAgent:
 
     def next_action(self):
         """Return the next action this agent wants to perform.
-
-        In this example, the function implements a random move. Replace this
-        function with your own approach.
 
         :return: (row, column, orientation)
         """
@@ -233,12 +229,6 @@ async def start_server(port):
         print("Running on ws://127.0.0.1:{}".format(port))
         await asyncio.Future()  # run forever
 
-    # try:
-    #     asyncio.get_event_loop().run_until_complete(server)
-    #     asyncio.get_event_loop().run_forever()
-    # except KeyboardInterrupt:
-        # pass
-
 
 def main(argv=None):
     global agentclass
@@ -254,9 +244,10 @@ def main(argv=None):
     logger.addHandler(logging.StreamHandler(sys.stdout))
 
     agentdir = args.agent1_dir
-    agentclass = DotsAndBoxesAgent
+    agentclass = DotsAndBoxesSocketPlayer
     asyncio.run(start_server(args.port))
 
 
 if __name__ == "__main__":
     sys.exit(main())
+
