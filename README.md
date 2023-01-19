@@ -20,7 +20,7 @@ The departmental computers will be used to run a tournament and submit your impl
 You will see a personal directory in:
 
 ```
-/cw/lvs/NoCsBack/vakken/ac2122/H0T25A/ml-project
+/cw/lvs/NoCsBack/vakken/ac2223/H0T25A/ml-project
 ```
 
 There is an upper limit of 50MB on the disk space that you can use. Remote (ssh) users are also limited to 2GB of RAM.
@@ -28,31 +28,29 @@ There is an upper limit of 50MB on the disk space that you can use. Remote (ssh)
 OpenSpiel and other packages that you can use are pre-installed in a virtual environment, which can be activated using:
 
 ```
-source /cw/lvs/NoCsBack/vakken/ac2122/H0T25A/ml-project/venv/bin/activate
+source /cw/lvs/NoCsBack/vakken/ac2223/H0T25A/ml-project/venv/bin/activate
 ```
 
-Since this virtual environment will be used to run the tournament, you should avoid language features that are not compatible with the installed Python version (3.8.10) or use packages that are not installed. All of OpenSpiel's [required](https://github.com/deepmind/open_spiel/blob/v1.0.2/requirements.txt) and [optional](https://github.com/deepmind/open_spiel/blob/v1.0.2/open_spiel/scripts/python_extra_deps.sh) dependencies are currently installed.
+Since this virtual environment will be used to run the tournament, you should avoid language features that are not compatible with the installed Python version (3.10.6) or use packages that are not installed. All of OpenSpiel's [required](https://gitlab.kuleuven.be/dtai/courses/machine-learning-project/open_spiel/-/blob/dots_and_boxes/requirements.txt) and [optional](https://gitlab.kuleuven.be/dtai/courses/machine-learning-project/open_spiel/-/blob/dots_and_boxes/open_spiel/scripts/python_extra_deps.sh) dependencies are currently installed.
 
 ## Local installation
 
 This section describes how get started with using Dots and Boxes in OpenSpiel.
 
-
-First, download [our custom branch of OpenSpiel](https://gitlab.kuleuven.be/dtai/courses/machine-learning-project/open_spiel/-/tree/dots_and_boxes) and install as [described on the github site](https://openspiel.readthedocs.io/en/latest/install.html#installation-from-source). To guarantee compatibility with the installation on the departmental computers, you should use v1.2 of OpenSpiel. You can download this version with:
+First, download [our custom branch of OpenSpiel](https://gitlab.kuleuven.be/dtai/courses/machine-learning-project/open_spiel/-/tree/dots_and_boxes).
 
 ```
-git clone -b 'v1.2' --single-branch --depth 1 https://gitlab.kuleuven.be/dtai/courses/machine-learning-project/open_spiel.git
-git checkout dots_and_boxes
+git clone -b dots_and_boxes https://gitlab.kuleuven.be/dtai/courses/machine-learning-project/open_spiel.git
 ```
 
-Next, update your `PYTHONPATH` as discussed in [OpenSpiel's installation instructions](https://openspiel.readthedocs.io/en/latest/install.html#installation-from-source), reload the shell if necessary, and activate the virtual environment.
+Next, install from source as described in [OpenSpiel's documentation](https://openspiel.readthedocs.io/en/latest/install.html#installation-from-source). Don't forget to update your `PYTHONPATH`, reload the shell if necessary, and activate the virtual environment.
 To make sure everything works, you can try to execute the example script:
 
 ```
 python3 python/examples/dotsandboxes_example.py
 ```
 
-This will run two random players in dots and boxes. You can also play yourself on the keyboard by passing flags:
+This will run two random players in Dots and Boxes. You can also play yourself on the keyboard by passing flags:
 
 ```
 python3 python/examples/dotsandboxes_example.py \ 
@@ -80,17 +78,9 @@ Afterwards, you can load your resources based on this `package_directory`:
 model_file = os.path.join(package_directory, 'models', 'mymodel.pckl')
 ```
 
-If you use Tensorflow you cannot use the **default graph**. This will give problems when playing against other agents in the tournament. You can use the following code to create a new graph:
+If you use Tensorflow you must use the V2 api and cannot use `tf.compat` and `tf.compat.v1` namespaces. Otherwise, this will give problems when playing against other agents in the tournament.
 
-```python
-self.graph = tf.Graph()
-sess = tf.Session(graph=self.graph)
-sess.__enter__()
-with self.graph.as_default():
-    pass  # code needing sess goes here
-```
-
-If you prefer to program in C++, you can also use OpenSpiel's C++ API. Although, you will still have to write a Python wrapper to be able to participate in the tournament. To compile C++ code on the departmental computers you can use the g++ compiler.
+If you prefer to program in C++, you can also use OpenSpiel's C++ API. Although, you will still have to write a Python wrapper to be able to participate in the tournament. To compile C++ code on the departmental computers you can use the `usr/bin/g++-11` compiler.
 
 
 ## Submission using the Departmental Computers
@@ -104,13 +94,13 @@ The departmental computers have openspiel and its dependencies installed such th
 
 ### Installation cannot find tensorflow
 
-Tensorflow is not compatible with Python3.10. Use Python3.9 or earlier.
+Tensorflow is only compatible with Python 3.7--3.10.
 
 On macOS you can use an older version by running these commands before the install script:
 
 ```
-brew install python@3.9  # if using homebrew
-virtualenv -p /usr/local/opt/python@3.9/bin/python3 venv
+brew install python@3.10  # if using homebrew
+virtualenv -p /usr/local/opt/python@3.10/bin/python3 venv
 . ./venv/bin/activate
 ```
 
