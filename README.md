@@ -104,6 +104,14 @@ virtualenv -p /usr/local/opt/python@3.10/bin/python3 venv
 . ./venv/bin/activate
 ```
 
+### Tensorflow / PyTorch does not work on Apple Silicon
+
+When using macOs on M1/M2 Apple Silicon, you might need to use the custom packages provided by Apple:
+
+- https://developer.apple.com/metal/pytorch/
+- https://developer.apple.com/metal/tensorflow-plugin/
+
+
 ### Module absl not found
 
 Install the required packages (in the virtual environment).
