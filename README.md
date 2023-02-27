@@ -124,6 +124,12 @@ export PYTHONPATH=.:./build/python:$PYTHONPATH
 
 If you encounter this error on the departmental computers, make sure to activate the virtual environment (see above).
 
+### Cannot import OpenSpiel: incompatible architecture
+
+Check that your Python version is compiled for the same architecture as you are compile C++ code. You can check this by running `python3 -c "import platform; print(platform.platform())"` and compare the output to running `arch`.
+
+This can occur on M1/M2 Apple computers when you see: `ImportError: dlopen ... (mach-o file, but is an incompatible architecture (have 'arm64', need 'x86_64')`. This is resolved by forcing the architecture (and potentially reinstalling some libraries): `env /usr/bin/arch -arm64  /bin/zsh --login`.
+
 ### Compilation fails on 'Return statement with no value'
 
 Most compilers will allow an empty return statement, but some do not.
@@ -134,3 +140,14 @@ open_spiel/open_spiel/higc/referee_test.cc:229:47: error: return-statement with 
 ```
 
 You can easily fix this by replacing `return;` with `return 0;` in the source code.
+
+### Tests fail with ValueError: setting an array element with a sequence
+
+If you see one of the following two errors:
+
+```
+ValueError: setting an array element with a sequence. The requested array has an inhomogeneous shape after 2 dimensions. The detected shape was (10, 3) + inhomogeneous part.
+ValueError: The history as tensor in the same infoset are different:
+```
+
+This is because Numpy became more strict. You can downgrade numpy using `pip install "numpy==1.21.6"` to eliminiate the errors (but it will most likely have no effect on the correctness of the project).
