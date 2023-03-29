@@ -159,3 +159,20 @@ ValueError: The history as tensor in the same infoset are different:
 ```
 
 This is because Numpy became more strict. You can downgrade numpy using `pip install "numpy==1.21.6"` to eliminiate the errors (but it will most likely have no effect on the correctness of the project).
+
+### Dots and boxes game not registered in games list
+
+If you get an `AssertionError:  assert "dots_and_boxes" in games_list` or do not see `dots_and_boxes` in the output of `pyspiel.registered_names()` you are probably using the wrong branch or have multiple versions of OpenSpiel installed.
+
+Things to check:
+
+- Did you previously install the original OpenSpiel version? Openspiel should not be in the output of `pip list` and `echo $PYTHONPATH` should (only) print the directory of the custom branch.
+- Are you sure you are in the `dotsandboxes` branch? Run `git branch` in the directory where you cloned the repo. It should print `dots_and_boxes`.
+- Check where the files are located that you are using. The example files should be in the same directory as the package you are using. If you have multiple installations these can differ based on your path settings. After all import statements, add:
+
+```
+import sys
+print(sys.path)  # Check which paths are being search for the OpenSpiel package
+print(pyspiel)   # Print the location of the used OpenSpiel package
+print(__file__)  # Print the location of the current script being executed
+```
