@@ -35,16 +35,10 @@ Since this virtual environment will be used to run the tournament, you should av
 
 ## Local installation
 
-This section describes how get started with using Dots and Boxes in OpenSpiel.
+We make use of the public version of OpenSpiel. See the [documentation](https://openspiel.readthedocs.io/en/latest/) for installation options.
 
-First, download [our custom branch of OpenSpiel](https://gitlab.kuleuven.be/dtai/courses/machine-learning-project/open_spiel/-/tree/dots_and_boxes).
 
-```
-git clone -b dots_and_boxes https://gitlab.kuleuven.be/dtai/courses/machine-learning-project/open_spiel.git
-```
-
-Next, install from source as described in [OpenSpiel's documentation](https://openspiel.readthedocs.io/en/latest/install.html#installation-from-source). Don't forget to update your `PYTHONPATH`, reload the shell if necessary, and activate the virtual environment.
-To make sure everything works, you can try to execute the example script:
+If you have a local install of the repository, you can test the Dots and Boxes game with:
 
 ```
 python3 python/examples/dotsandboxes_example.py
@@ -122,6 +116,10 @@ pip install -r requirements.txt
 
 ### openspiel or pyspiel not found
 
+If you encounter this error on the departmental computers, make sure to activate the virtual environment (see above).
+
+If you installed openspiel from source:
+
 First, check if the `pyspiel` module is available in `build/python`. If it's absent compilation failed. Try compiling again.
 
 Second, make sure the modules can be found by Python by setting the `PYTHONPATH` environment variable:
@@ -130,7 +128,11 @@ Second, make sure the modules can be found by Python by setting the `PYTHONPATH`
 export PYTHONPATH=.:./build/python:$PYTHONPATH
 ```
 
-If you encounter this error on the departmental computers, make sure to activate the virtual environment (see above).
+You can also use `pip install -e` (for those who know what development mode in pip is).
+
+If you have install openspiel using pip:
+
+Check that openspiel is installed in the virtual environment you are using.
 
 ### Cannot import OpenSpiel: incompatible architecture
 
@@ -162,12 +164,9 @@ This is because Numpy became more strict. You can downgrade numpy using `pip ins
 
 ### Dots and boxes game not registered in games list
 
-If you get an `AssertionError:  assert "dots_and_boxes" in games_list` or do not see `dots_and_boxes` in the output of `pyspiel.registered_names()` you are probably using the wrong branch or have multiple versions of OpenSpiel installed.
-
 Things to check:
 
-- Did you previously install the original OpenSpiel version? Openspiel should not be in the output of `pip list` and `echo $PYTHONPATH` should (only) print the directory of the custom branch.
-- Are you sure you are in the `dotsandboxes` branch? Run `git branch` in the directory where you cloned the repo. It should print `dots_and_boxes`.
+- Did install an old versio of OpenSpiel version? 
 - Check where the files are located that you are using. The example files should be in the same directory as the package you are using. If you have multiple installations these can differ based on your path settings. After all import statements, add:
 
 ```
