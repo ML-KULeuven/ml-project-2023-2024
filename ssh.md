@@ -155,7 +155,7 @@ You can now connect with
 
 The `st.cs.kuleuven.be` server is a login node, it is not meant to run
 experiments. The machines that you can run experiments on have the
-addres `<pcname>.cs.kotnet.kuleuven.be`. The next section points to a
+addres `<pcname>.student.cs.kuleuven.be`. The next section points to a
 list of available machines. These machines are not immediately reachable
 outside the KU Leuven network, you need to go through the login node
 first. From the login node, you can reach any other machine again
@@ -164,7 +164,7 @@ through ssh. For example:
 ```sh
  % ssh st.cs.kuleuven.be
  ...
- (st) % ssh aalst.cs.kotnet.kuleuven.be
+ (st) % ssh aalst.student.cs.kuleuven.be
 ```
 
 This is possible because your private keys were stored automatically in
@@ -188,7 +188,7 @@ to the configuration file. Here is a complete example:
 Host aalst
     User           r0123456
     IdentityFile   ~/.ssh/id_rsa
-    HostName       aalst.cs.kotnet.kuleuven.be
+    HostName       aalst.student.cs.kuleuven.be
     ProxyJump      st.cs.kuleuven.be
 ```
 
@@ -200,7 +200,7 @@ You can now connect with
 
 In **Windows** a proxy can be setup through PuTTY as follows:
 
-- Session → Host Name (or IP address) = aalst.cs.kotnet.kuleuven.be
+- Session → Host Name (or IP address) = aalst.student.cs.kuleuven.be
 - Session → Port = 22
 - Connection → Data → Auto-login username = r0123456
 - Connection → Proxy → Proxy type = local
@@ -221,27 +221,28 @@ You can now connect with
 
 ## List of available machines
 
-The page <http://mysql.cs.kotnet.kuleuven.be/> gives an overview of the
+The page <http://mysql.student.cs.kuleuven.be/> gives an overview of the
 available departmental machines and their current load. Avoid using a machine
 with high-load; it will improve your and the other user's experience.
 
 This page is only accessible from within the KU Leuven network. You can always
 use SSH to reach it using an SSH tunnel to the server
-`mysql.cs.kotnet.kuleuven.be` at port 80. Set up the tunnel by entering:
+`mysql.student.cs.kuleuven.be` at port 80. Set up the tunnel by entering:
 
 - on Unix:
 
     ```sh
-    % ssh -L 8080:mysql.cs.kotnet.kuleuven.be:80 st.cs.kuleuven.be
+    % ssh -L 10480:mysql.student.cs.kuleuven.be:443 st.cs.kuleuven.be
     ```
 
 - on Windows:
 
     ```sh
-    % plink -L 8080:mysql.cs.kotnet.kuleuven.be:80 st.cs.kuleuven.be
+    % plink -L 10480:mysql.student.cs.kuleuven.be:443 st.cs.kuleuven.be
     ```
 
-Now you can reach the website at <http://localhost:8080/>
+Now you can reach the website at <https://localhost.cs.kuleuven.be:10480/>.
+Make sure to include the "https"!
 
 ## Remote copying
 
@@ -351,7 +352,7 @@ regularly, so do not store anything important here. It is the perfect
 place for heavy output of experiments, just make sure to copy it to a
 safe place if you need to keep it.
 
-**Course directory**: `/cw/lvs/NoCsBack/vakken/ac2021/H0T25A/ml-project/r0123456`
+**Course directory**: `/cw/lvs/NoCsBack/vakken/ac2324/H0T25A/ml-project/r0123456`
 
 This folder is your personal space for submitting your implementation. The
 folder is accessible from all the departmental machines but not from the login
