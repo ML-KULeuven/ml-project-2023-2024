@@ -1,5 +1,5 @@
 
-# ML Project February 2023
+# ML Project February 2024
 
 This repository contains the code to setup the final evaluation of the course "[Machine Learning: Project](https://onderwijsaanbod.kuleuven.be/syllabi/e/H0T25AE.htm)" (KU Leuven, Faculty of Engineering, Department of Computer Science, [DTAI Section](https://dtai.cs.kuleuven.be)).
 
@@ -20,18 +20,18 @@ The departmental computers will be used to run a tournament and submit your impl
 You will see a personal directory in:
 
 ```
-/cw/lvs/NoCsBack/vakken/ac2223/H0T25A/ml-project
+/cw/lvs/NoCsBack/vakken/H0T25A/ml-project
 ```
 
 There is an upper limit of 50MB on the disk space that you can use. Remote (ssh) users are also limited to 2GB of RAM.
 
-OpenSpiel and other packages that you can use are pre-installed in a virtual environment, which can be activated using:
+OpenSpiel (v1.4) and other packages that you can use are pre-installed in a virtual environment, which can be activated using:
 
 ```
-source /cw/lvs/NoCsBack/vakken/ac2223/H0T25A/ml-project/venv/bin/activate
+source /cw/lvs/NoCsBack/vakken/H0T25A/ml-project/venv/bin/activate
 ```
 
-Since this virtual environment will be used to run the tournament, you should avoid language features that are not compatible with the installed Python version (3.10.6) or use packages that are not installed. All of OpenSpiel's [required](https://gitlab.kuleuven.be/dtai/courses/machine-learning-project/open_spiel/-/blob/dots_and_boxes/requirements.txt) and [optional](https://gitlab.kuleuven.be/dtai/courses/machine-learning-project/open_spiel/-/blob/dots_and_boxes/open_spiel/scripts/python_extra_deps.sh) dependencies are currently installed.
+Since this virtual environment will be used to run the tournament, you should avoid language features that are not compatible with the installed Python version (3.10.12) or use packages that are not installed. All of OpenSpiel's [required](https://github.com/google-deepmind/open_spiel/blob/v1.4/requirements.txt) dependencies are currently installed, as well as `torch==2.2.0` and `tensorflow==2.15.0`.
 
 ## Local installation
 
@@ -79,7 +79,7 @@ If you prefer to program in C++, you can also use OpenSpiel's C++ API. Although,
 
 ## Submission using the Departmental Computers
 
-To submit your agent, a copy of you code and agent needs to be available on the departmental computers in a directory assigned to you (only your own code, openspiel and other libraries are provided). Also the code to train your agent should be included.
+To submit your agent, a copy of your code and agent needs to be available on the departmental computers in a directory assigned to you (only your own code, openspiel and other libraries are provided). Also the code to train your agent should be included.
 
 The departmental computers have openspiel and its dependencies installed such that you can verify that your agent works. During the semester the tournament script will be run to play games between the (preliminary) agents that are already available. A tentative ranking will be shared.
 
@@ -88,7 +88,7 @@ The departmental computers have openspiel and its dependencies installed such th
 
 ### Installation cannot find tensorflow
 
-Tensorflow is only compatible with Python 3.7--3.10.
+Tensorflow is only compatible with Python 3.8--3.11.
 
 On macOS you can use an older version by running these commands before the install script:
 
@@ -100,7 +100,7 @@ virtualenv -p /usr/local/opt/python@3.10/bin/python3 venv
 
 ### Tensorflow / PyTorch does not work on Apple Silicon
 
-When using macOs on M1/M2 Apple Silicon, you might need to use the custom packages provided by Apple:
+When using macOS on M1/M2 Apple Silicon, you might need to use the custom packages provided by Apple:
 
 - https://developer.apple.com/metal/pytorch/
 - https://developer.apple.com/metal/tensorflow-plugin/
@@ -166,7 +166,7 @@ This is because Numpy became more strict. You can downgrade numpy using `pip ins
 
 Things to check:
 
-- Did install an old versio of OpenSpiel version? 
+- Did you install an old version of OpenSpiel version? 
 - Check where the files are located that you are using. The example files should be in the same directory as the package you are using. If you have multiple installations these can differ based on your path settings. After all import statements, add:
 
 ```
