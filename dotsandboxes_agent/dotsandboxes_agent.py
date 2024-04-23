@@ -81,7 +81,7 @@ def test_api_calls():
     tournament. It should not trigger any Exceptions.
     """
     dotsandboxes_game_string = (
-        "dotsandboxes(num_rows=5,num_cols=5)")
+        "dots_and_boxes(num_rows=5,num_cols=5)")
     game = pyspiel.load_game(dotsandboxes_game_string)
     bots = [get_agent_for_tournament(player_id) for player_id in [0,1]]
     returns = evaluate_bots.evaluate_bots(game.new_initial_state(), bots, np.random)
