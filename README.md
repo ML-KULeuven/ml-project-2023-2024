@@ -59,6 +59,7 @@ The tournament will be played with agents that are available on the departmental
 - Your agent extends the `Agent` class provided in the file `dotsandboxes_agent/dotsandboxes_agent.py`.
 - The tournament code will scrape the directory provided for you on the departmental computers for the `dotsandboxes_agent.py` file and call the `get_agent_for_tournament` method. If multiple matching files are found, a random one will be used.
 - Your agent should be ready to play in a few seconds, thus use a pre-trained policy. An agent that is not responding after 10 seconds will forfeit the game.
+- Your agent should provide the next action within 200ms. An agent that does not reply within 200ms will forfeit the game.
 
 Make sure you **do not use relative paths** in your implementation to load your trained model, as this will fail when running your agent from a different directory. Best practice is to retrieve the absolute path to the module directory:
 
